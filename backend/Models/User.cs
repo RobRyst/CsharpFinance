@@ -7,16 +7,15 @@ namespace FinanceApp.Models
 
         [Key] public int Id { get; set; }
 
-        [Required]
         [MaxLength(100)]
-         public string Name { get; set; }
+        public required string Name { get; set; }
 
-        [Required]
         [MaxLength(100)]
         [EmailAddress]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        [Required]
-        public string PasswordHash { get; set; }
+        public required string PasswordHash { get; set; }
+
+        public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 }

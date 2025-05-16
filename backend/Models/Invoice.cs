@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinanceApp.Models
 {
@@ -6,16 +7,15 @@ namespace FinanceApp.Models
     {
         [Key]
         public int id { get; set; }
-        [Required]
-        public double sub_total { get; set; }
-        [Required]
-        public int discount { get; set; }
-        [Required]
-        public double total { get; set; }
-        [Required]
-        public DateOnly invoiceCreated { get; set; }
-        [Required]
-        public DateOnly invoiceDueDate { get; set; }
+        public required double sub_total { get; set; }
+        public required int discount { get; set; }
+        public required double total { get; set; }
+        public required DateOnly invoiceCreated { get; set; }
+        public required DateOnly invoiceDueDate { get; set; }
+
+        [ForeignKey("User")] public int UsedId { get; set; }
+        
+        public User? User { get; set; }
 
     }
 }

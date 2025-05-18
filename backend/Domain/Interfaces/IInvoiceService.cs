@@ -1,7 +1,7 @@
 
 using FinanceApp.Entities;
 
-namespace FinanceApp.Application.Interfaces
+namespace FinanceApp.Domain.Interfaces
 public interface IInvoiceService
 {
     Task<IEnumberable<Invoice>> getAllAsync();

@@ -3,16 +3,19 @@ using System;
 using FinanceApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace backend.Migrations
+namespace backend.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250516172044_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +28,7 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("UsedId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("discount")
@@ -45,7 +48,7 @@ namespace backend.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("UsedId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Invoices");
                 });
@@ -79,7 +82,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("FinanceApp.Models.User", "User")
                         .WithMany("Invoices")
-                        .HasForeignKey("UsedId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

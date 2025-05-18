@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using FinanceApp.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
-namespace FinanceApp.Infrastructure.Data
+using backend.Domain.Entities;
+
+namespace backend.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
     {

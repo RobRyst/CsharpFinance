@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FinanceApp.Domain.Entities
+namespace backend.Domain.Entities
 {
     public class Invoice
     {

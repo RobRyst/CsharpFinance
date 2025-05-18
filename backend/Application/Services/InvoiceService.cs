@@ -1,11 +1,24 @@
-public class InvoiceService : IInvoiceService
+using FinanceApp.Domain.Entities;
+using FinanceApp.Domain.Interfaces;
+using FinanceApp.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace FinanceApp.Services.InvoiceService
 {
-    private readonly ApplicationDbContext _context;
-
-    public InvoiceServiceService(ApplicationDbContext context)
+    public class InvoiceService : IInvoiceService
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public async Task<IEnumberable<Invoice>>
+        public InvoiceService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Invoice>> GetAllAsync()
+        {
+            return await _context.Invoices.ToListAsync();
+        }
+
+        // Add the remaining methods (GetByIdAsync, CreateAsync, etc.)
+    }
 }

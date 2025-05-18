@@ -1,14 +1,14 @@
+using backend.Domain.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-using FinanceApp.Domain.Entities;
-
-namespace FinanceApp.Domain.Interfaces
+namespace backend.Domain.Interfaces;
 public interface IInvoiceService
 {
-    Task<IEnumberable<Invoice>> getAllAsync();
+    Task<IEnumerable<Invoice>> GetAllAsync();
     Task<Invoice> GetByIdAsync(int id);
-    Task<Invoice> CreateAsync(Invoice invoice)
-
-    Task<Invoice> UpdateAsync(int id, Invoice invoice)
-    Task<bool> DeleteAsync(int id)
+    Task<Invoice> CreateAsync(Invoice invoice);
+    Task<Invoice> UpdateAsync(int id, Invoice invoice);
+    Task<bool> DeleteAsync(int id);
 
 }

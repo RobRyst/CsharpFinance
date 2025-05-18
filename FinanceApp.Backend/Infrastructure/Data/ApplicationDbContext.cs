@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using FinanceApp.Models;
+using FinanceApp.Domain.Entities;
 
-namespace FinanceApp.Data
+namespace FinanceApp.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
     }

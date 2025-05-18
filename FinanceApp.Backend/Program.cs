@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
-using FinanceApp.Data;
+using FinanceApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

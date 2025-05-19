@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
-using FinanceApp.Infrastructure.Data;
+using backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using backend.Application.Services;
+using backend.Domain.Interfaces;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
 builder.Services.AddCors(opt =>
 {
@@ -16,6 +20,11 @@ builder.Services.AddCors(opt =>
     {
         PolicyBuilder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
     });
+});
+
+builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
+{
+
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -38,8 +47,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
 
-app.UseAuthentication(); //For Senere
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -13,7 +13,8 @@ namespace backend.Domain.Entities
         public required DateOnly invoiceCreated { get; set; }
         public required DateOnly invoiceDueDate { get; set; }
 
-        [ForeignKey("User")] public int UserId { get; set; }
+        [ForeignKey("User")]
+        public int UserId { get; set; }
         
         public User? User { get; set; }
 

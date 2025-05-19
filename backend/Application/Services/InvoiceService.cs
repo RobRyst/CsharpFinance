@@ -1,9 +1,10 @@
-using FinanceApp.Domain.Entities;
-using FinanceApp.Domain.Interfaces;
-using FinanceApp.Infrastructure.Data;
+using System.Reflection;
+using backend.Domain.Entities;
+using backend.Domain.Interfaces;
+using backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceApp.Services.InvoiceService
+namespace backend.Application.Services
 {
     public class InvoiceService : IInvoiceService
     {
@@ -19,6 +20,42 @@ namespace FinanceApp.Services.InvoiceService
             return await _context.Invoices.ToListAsync();
         }
 
-        // Add the remaining methods (GetByIdAsync, CreateAsync, etc.)
+        public async Task<Invoice> GetByIdAsync(int id)
+        {
+            return await _context.Invoices.FindAsync(id);
+        }
+
+        public async Task<Invoice> CreateAsync(Invoice invoice)
+        {
+            _context.Invoices.Add(invoice);
+            await _context.SaveChangesAsync();
+            return invoice;
+        }
+
+        public async Task<Invoice> UpdateAsync(int id, Invoice invoice)
+        {
+            var existingInvoice = await _context.Invoices.FindAsync(id);
+            if (existingInvoice == null)
+            {
+                return null!;
+            }
+            existingInvoice.invoiceDueDate = invoice.invoiceDueDate;
+
+            await _context.SaveChangesAsync();
+            return existingInvoice;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var invoice = await _context.Invoices.FindAsync(id);
+            if (invoice == null)
+            {
+                return false;
+            }
+
+            _context.Invoices.Remove(invoice);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

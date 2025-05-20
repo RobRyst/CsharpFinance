@@ -9,13 +9,13 @@ namespace backend.Domain.Entities
         [Key] public int Id { get; set; }
 
         [MaxLength(100)]
-        public required string Name { get; set; }
+        public required string Name { get; set; } = string.Empty;
 
         [MaxLength(100)]
         [EmailAddress]
-        public required string Email { get; set; }
+        public required string Email { get; set; } = string.Empty;
 
-        public required string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } = default!;
 
         public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }

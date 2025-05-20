@@ -16,9 +16,11 @@ builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
 builder.Services.AddCors(opt =>
 {
-    opt.AddPolicy("CorsPolicy", PolicyBuilder =>
+    opt.AddPolicy("CorsPolicy", policyBuilder =>
     {
-        PolicyBuilder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+        policyBuilder.AllowAnyHeader()
+                     .AllowAnyMethod()
+                     .WithOrigins("http://localhost:5173");
     });
 });
 
@@ -43,7 +45,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseCors("CorsPolicy");
 

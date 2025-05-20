@@ -1,8 +1,12 @@
+import DashboardLayout from "../layout/DashboardLayout";
 import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
+import Bill from "./pages/Bill";
+import Budget from "./pages/Budget";
 import Dashboard from "./pages/Dashboard";
 import Invoice from "./pages/Invoice";
 import Login from "./pages/Login";
+import Pot from "./pages/Pot";
 import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 
@@ -17,18 +21,16 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <DashboardLayout />
             </PrivateRoute>
           }
-        />
-        <Route
-          path="/invoice"
-          element={
-            <PrivateRoute>
-              <Invoice />
-            </PrivateRoute>
-          }
-        />
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="invoice" element={<Invoice />} />
+          <Route path="budget" element={<Budget />} />
+          <Route path="pot" element={<Pot />} />
+          <Route path="bill" element={<Bill />} />
+        </Route>
       </Routes>
     </>
   );

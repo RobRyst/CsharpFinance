@@ -7,6 +7,7 @@ namespace backend.Domain.Entities
     {
         [Key]
         public int id { get; set; }
+        public required string status { get; set; }
         public required double sub_total { get; set; }
         public required int discount { get; set; }
         public required double total { get; set; }

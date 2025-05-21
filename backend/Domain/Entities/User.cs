@@ -12,6 +12,9 @@ namespace backend.Domain.Entities
         public required string Name { get; set; } = string.Empty;
 
         [MaxLength(100)]
+        public required string Address { get; set; }
+
+        [MaxLength(100)]
         [EmailAddress]
         public required string Email { get; set; } = string.Empty;
 

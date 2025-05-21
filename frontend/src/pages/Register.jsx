@@ -65,6 +65,14 @@ const Register = () => {
             />
             <input
               className="border rounded px-3 py-2 mb-2 w-full"
+              name="address"
+              value={form.address}
+              onChange={handleChange}
+              placeholder="Address"
+              type="text"
+            />
+            <input
+              className="border rounded px-3 py-2 mb-2 w-full"
               name="email"
               value={form.email}
               onChange={handleChange}

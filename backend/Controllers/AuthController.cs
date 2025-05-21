@@ -49,6 +49,7 @@ namespace backend.Controllers
             {
                 Name = $"{request.FirstName} {request.LastName}",
                 Email = request.Email,
+                Address = request.Address
             };
 
             user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);

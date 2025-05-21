@@ -35,7 +35,9 @@ namespace backend.Controllers
                 return Unauthorized("Invalid Email or Password");
             }
             Console.WriteLine($"Login attempt: {request.Email} | Hash: {user?.PasswordHash}");
-             return Ok(new { token = "fake-jwt-token", name = user.Name });
+             return Ok(new { token = "fake-jwt-token",
+                firstname = user.FirstName, 
+                lastname = user.LastName  });
         }
 
         [HttpPost("register")]
@@ -47,7 +49,8 @@ namespace backend.Controllers
 
             var user = new User
             {
-                Name = $"{request.FirstName} {request.LastName}",
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 Email = request.Email,
                 Address = request.Address
             };

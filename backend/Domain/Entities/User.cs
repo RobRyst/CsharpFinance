@@ -9,8 +9,9 @@ namespace backend.Domain.Entities
         [Key] public int Id { get; set; }
 
         [MaxLength(100)]
-        public required string Name { get; set; } = string.Empty;
+        public required string FirstName { get; set; } = string.Empty;
 
+        public required string LastName { get; set; } = string.Empty;
         [MaxLength(100)]
         public required string Address { get; set; }
 

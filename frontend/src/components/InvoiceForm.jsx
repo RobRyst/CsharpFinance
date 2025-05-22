@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const InvoiceForm = () => {
   const [users, setUsers] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -48,10 +50,7 @@ const InvoiceForm = () => {
       return updatedForm;
     });
 
-    // update total based on latest values (use latest values, not stale)
-    // But because setState is async, get the latest values explicitly:
     if (name === "sub_total" || name === "discount") {
-      // compute total using the updated values:
       let newSubTotal = name === "sub_total" ? inputValue : form.sub_total;
       let newDiscount = name === "discount" ? inputValue : form.discount;
       const newTotal = newSubTotal - (newSubTotal * newDiscount) / 100;

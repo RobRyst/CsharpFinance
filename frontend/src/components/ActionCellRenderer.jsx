@@ -4,14 +4,16 @@ import { useState } from "react";
 const ActionCellRenderer = (props) => {
   const { id } = props.data;
   const { onDeleteSuccess } = props;
+  // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
 
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:5086/api/invoice/${id}`);
       setSuccess(true);
-      // Notify parent component to update state (remove the row)
+
       if (onDeleteSuccess) {
         onDeleteSuccess(id);
       }

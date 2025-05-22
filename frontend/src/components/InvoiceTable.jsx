@@ -3,6 +3,7 @@ import {
   ModuleRegistry,
   themeMaterial,
 } from "ag-grid-community";
+import ActionCellRenderer from "./ActionCellRenderer";
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
@@ -22,8 +23,12 @@ const InvoiceTable = () => {
       .catch((error) => console.error("Failed to fetch", error));
   }, []);
 
-  const columnDefs = useMemo(
-    () => [
+  const columnDefs = useMemo(() => {
+    const onDeleteSuccess = (deletedId) => {
+      setRowData((prev) => prev.filter((row) => row.id !== deletedId));
+    };
+
+    return [
       { field: "id", headerName: "Id", sortable: true, filter: true },
       {
         field: "firstName",
@@ -50,6 +55,7 @@ const InvoiceTable = () => {
         sortable: true,
         filter: true,
       },
+      { field: "total", headerName: "Total", sortable: true, filter: true },
       {
         field: "invoiceCreated",
         headerName: "Created",
@@ -62,9 +68,17 @@ const InvoiceTable = () => {
         sortable: true,
         filter: true,
       },
-    ],
-    []
-  );
+      {
+        headerName: "Actions",
+        cellRenderer: "actionCellRenderer",
+        maxWidth: 160,
+        flex: 0, // prevent it from expanding too much
+        cellRendererParams: { onDeleteSuccess },
+        sortable: false, // Actions column usually shouldn't be sortable
+        filter: false, // Actions column usually shouldn't be filtered
+      },
+    ];
+  }, []);
 
   return (
     <div className="ag-theme-alpine" style={{ height: 600, width: "100%" }}>
@@ -72,6 +86,7 @@ const InvoiceTable = () => {
         theme={themeMaterial}
         rowData={rowData}
         columnDefs={columnDefs}
+        components={{ actionCellRenderer: ActionCellRenderer }}
         defaultColDef={{ resizable: true, flex: 1 }}
       />
     </div>

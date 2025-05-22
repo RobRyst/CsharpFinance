@@ -1,5 +1,6 @@
 using backend.Domain.Entities;
 using backend.Domain.Interfaces;
+using backend.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -28,6 +29,13 @@ namespace backend.Controllers
             var invoice = await _invoiceService.GetByIdAsync(id);
             if (invoice == null) return NotFound();
             return Ok(invoice);
+        }
+
+        [HttpGet("with-user")]
+        public async Task<ActionResult<IEnumerable<InvoiceDto>>> GetAllInvoiceWithUser()
+        {
+            var invoices = await _invoiceService.GetAllWithUserAsync();
+            return Ok(invoices);
         }
 
         [HttpPost]

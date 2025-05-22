@@ -1,6 +1,7 @@
 using System.Reflection;
 using backend.Domain.Entities;
 using backend.Domain.Interfaces;
+using backend.Dtos;
 using backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,27 @@ namespace backend.Application.Services
         {
             _context = context;
         }
+
+
+        public async Task<IEnumerable<InvoiceDto>> GetAllWithUserAsync()
+    {
+        return await _context.Invoices
+            .Include(i => i.User)
+            .Select(i => new InvoiceDto
+            {
+                Id = i.Id,
+                Status = i.Status,
+                Sub_total = i.Sub_total,
+                Discount = i.Discount,
+                Total = i.Total,
+                InvoiceCreated = i.InvoiceCreated,
+                InvoiceDueDate = i.InvoiceDueDate,
+                UserId = i.UserId,
+                FirstName = i.User != null ? i.User.FirstName : "",
+                LastName = i.User != null ? i.User.LastName : ""
+            })
+            .ToListAsync();
+    }
 
         public async Task<IEnumerable<Invoice>> GetAllAsync()
         {

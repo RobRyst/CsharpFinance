@@ -7,11 +7,11 @@ namespace backend.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
     {
+
+        public DbSet<User> Users { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
-        public DbSet<User> Users { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace backend.Application.Services
             {
                 return null!;
             }
-            existingInvoice.invoiceDueDate = invoice.invoiceDueDate;
+            existingInvoice.InvoiceDueDate = invoice.InvoiceDueDate;
 
             await _context.SaveChangesAsync();
             return existingInvoice;

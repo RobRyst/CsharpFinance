@@ -7,6 +7,7 @@ const Register = () => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
+    address: "",
     email: "",
     password: "",
   });
@@ -22,6 +23,12 @@ const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!form.password) {
+      setError("Password is required");
+      return;
+    }
+
     try {
       const res = await userRegister(form);
       localStorage.setItem("token", res.data.token);
@@ -77,6 +84,7 @@ const Register = () => {
               value={form.email}
               onChange={handleChange}
               placeholder="Email"
+              type="email"
             />
             <input
               className="border rounded px-3 py-2 mb-2 w-full"
@@ -91,7 +99,7 @@ const Register = () => {
                 className="bg-zinc-700 text-white rounded-xl p-4 hover:bg-green-700 w-full max-w-3xl"
                 type="submit"
               >
-                Login
+                Register
               </button>
             </div>
           </form>

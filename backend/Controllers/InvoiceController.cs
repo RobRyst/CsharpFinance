@@ -34,7 +34,7 @@ namespace backend.Controllers
         public async Task<ActionResult<Invoice>> Create(Invoice invoice)
         {
             var created = await _invoiceService.CreateAsync(invoice);
-            return CreatedAtAction(nameof(GetById), new { id = created.id }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]

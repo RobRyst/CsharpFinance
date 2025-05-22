@@ -6,13 +6,13 @@ namespace backend.Domain.Entities
     public class Invoice
     {
         [Key]
-        public int id { get; set; }
-        public required string status { get; set; }
-        public required double sub_total { get; set; }
-        public required int discount { get; set; }
-        public required double total { get; set; }
-        public required DateOnly invoiceCreated { get; set; }
-        public required DateOnly invoiceDueDate { get; set; }
+        public int Id { get; set; }
+        public required string Status { get; set; }
+        public required double Sub_total { get; set; }
+        public int Discount { get; set; }
+        public required double Total { get; set; }
+        public required DateOnly InvoiceCreated { get; set; }
+        public required DateOnly InvoiceDueDate { get; set; }
 
         [ForeignKey("User")]
         public int UserId { get; set; }

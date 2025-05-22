@@ -3,6 +3,7 @@ import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import Bill from "./pages/Bill";
 import Budget from "./pages/Budget";
+import CreateInvoice from "./pages/createInvoice";
 import Dashboard from "./pages/Dashboard";
 import Invoice from "./pages/Invoice";
 import Login from "./pages/Login";
@@ -30,6 +31,7 @@ function App() {
           <Route path="budget" element={<Budget />} />
           <Route path="pot" element={<Pot />} />
           <Route path="bill" element={<Bill />} />
+          <Route path="invoice/createInvoice" element={<CreateInvoice />} />
         </Route>
       </Routes>
     </>

@@ -17,6 +17,7 @@ const ActionCellRenderer = (props) => {
       if (onDeleteSuccess) {
         onDeleteSuccess(id);
       }
+      // eslint-disable-next-line no-unused-vars
     } catch (err) {
       setError("Could not delete Invoice");
     }

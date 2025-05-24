@@ -12,6 +12,7 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly PasswordHasher<User> _passwordHasher;
+        private readonly ILogger<AuthController> _logger;
 
         public AuthController(ApplicationDbContext context)
         {

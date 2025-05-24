@@ -1,18 +1,15 @@
-import {
-  AllCommunityModule,
-  ModuleRegistry,
-  themeMaterial,
-} from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import ActionCellRenderer from "./ActionCellRenderer";
 import { AgGridReact } from "ag-grid-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import axios from "axios";
-//import { useState } from "react";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const InvoiceTable = () => {
+const InvoiceTable = ({ filterTable }) => {
   const [rowData, setRowData] = useState([]);
+  const gridApi = useRef(null);
+  const gridColumnApi = useRef(null);
 
   useEffect(() => {
     axios
@@ -72,18 +69,36 @@ const InvoiceTable = () => {
         headerName: "Actions",
         cellRenderer: "actionCellRenderer",
         maxWidth: 160,
-        flex: 0, // prevent it from expanding too much
+        flex: 0,
         cellRendererParams: { onDeleteSuccess },
-        sortable: false, // Actions column usually shouldn't be sortable
-        filter: false, // Actions column usually shouldn't be filtered
+        sortable: false,
+        filter: false,
       },
     ];
   }, []);
 
+  // Called once grid is ready — store APIs in ref
+  const onGridReady = (params) => {
+    gridApi.current = params.api;
+    gridColumnApi.current = params.columnApi;
+
+    // Apply initial filter if one exists
+    if (filterTable) {
+      params.api.setQuickFilter(filterTable);
+    }
+  };
+
+  // Apply quick filter when filterText changes, only if gridApi is ready
+  useEffect(() => {
+    if (gridApi.current && gridApi.current.setQuickFilter) {
+      gridApi.current.setQuickFilter(filterTable);
+    }
+  }, [filterTable]);
+
   return (
     <div className="ag-theme-alpine" style={{ height: 600, width: "100%" }}>
       <AgGridReact
-        theme={themeMaterial}
+        onGridReady={onGridReady}
         rowData={rowData}
         columnDefs={columnDefs}
         components={{ actionCellRenderer: ActionCellRenderer }}

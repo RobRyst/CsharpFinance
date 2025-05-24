@@ -1,7 +1,9 @@
+import { useState } from "react";
 import InvoiceTable from "../components/InvoiceTable";
 import { useNavigate } from "react-router-dom";
 
 const Invoice = () => {
+  const [filterTable, setFilterTable] = useState("");
   const navigate = useNavigate();
 
   const handleCreateInvoice = () => {
@@ -21,6 +23,8 @@ const Invoice = () => {
               type="text"
               placeholder="Filter Table"
               className="w-64 p-2 mb-4 rounded-l border bg-white"
+              value={filterTable}
+              onChange={(e) => setFilterTable(e.target.value)}
             ></input>
           </div>
           <div className="flex flex-row gap-5">
@@ -42,7 +46,7 @@ const Invoice = () => {
         </div>
       </div>
 
-      <InvoiceTable />
+      <InvoiceTable filterTable={filterTable} />
     </>
   );
 };

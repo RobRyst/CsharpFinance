@@ -9,7 +9,6 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 const InvoiceTable = ({ filterTable }) => {
   const [rowData, setRowData] = useState([]);
   const gridApi = useRef(null);
-  const gridColumnApi = useRef(null);
 
   useEffect(() => {
     axios
@@ -77,21 +76,19 @@ const InvoiceTable = ({ filterTable }) => {
     ];
   }, []);
 
-  // Called once grid is ready — store APIs in ref
   const onGridReady = (params) => {
     gridApi.current = params.api;
-    gridColumnApi.current = params.columnApi;
 
     // Apply initial filter if one exists
     if (filterTable) {
-      params.api.setQuickFilter(filterTable);
+      params.api.setGridOption("quickFilterText", filterTable);
     }
   };
 
-  // Apply quick filter when filterText changes, only if gridApi is ready
+  // Apply quick filter when filterText changes
   useEffect(() => {
-    if (gridApi.current && gridApi.current.setQuickFilter) {
-      gridApi.current.setQuickFilter(filterTable);
+    if (gridApi.current) {
+      gridApi.current.setGridOption("quickFilterText", filterTable);
     }
   }, [filterTable]);
 

@@ -1,3 +1,4 @@
+// Invoice.jsx - Add console logs to debug
 import { useState } from "react";
 import InvoiceTable from "../components/InvoiceTable";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,14 @@ const Invoice = () => {
 
   const handleDownloadAllInvoices = () => {};
 
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    console.log("Filter input changed to:", value); // Debug log
+    setFilterTable(value);
+  };
+
+  console.log("Invoice component rendering with filterTable:", filterTable); // Debug log
+
   return (
     <>
       <div>
@@ -24,8 +33,8 @@ const Invoice = () => {
               placeholder="Filter Table"
               className="w-64 p-2 mb-4 rounded-l border bg-white"
               value={filterTable}
-              onChange={(e) => setFilterTable(e.target.value)}
-            ></input>
+              onChange={handleFilterChange}
+            />
           </div>
           <div className="flex flex-row gap-5">
             <button
@@ -34,7 +43,7 @@ const Invoice = () => {
               className="mt-4 bg-zinc-600 hover:bg-blue-700 text-white p-2 mb-4 rounded-xl"
             >
               + Create Invoice
-            </button>{" "}
+            </button>
             <button
               type="button"
               onClick={handleDownloadAllInvoices}

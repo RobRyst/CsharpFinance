@@ -23,8 +23,27 @@ const ActionCellRenderer = (props) => {
     }
   };
 
-  const handleDownload = () => {
-    window.open(`http://localhost:5086/api/invoice/download/${id}`, "_blank");
+  const handleDownloadInvoice = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5086/api/invoice/download-pdf/${id}`,
+        {
+          responseType: "blob",
+        }
+      );
+
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `Invoice_${id}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("PDF download failed", error);
+    }
   };
 
   return (
@@ -36,7 +55,7 @@ const ActionCellRenderer = (props) => {
         Delete
       </button>
       <button
-        onClick={handleDownload}
+        onClick={handleDownloadInvoice}
         className="bg-green-500 text-white px-2 py-1 rounded text-sm"
       >
         Download

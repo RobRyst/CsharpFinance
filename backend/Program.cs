@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using backend.Application.Services;
 using backend.Domain.Interfaces;
-using Microsoft.Extensions.Options;
+using backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<PdfService>();
 
 builder.Services.AddCors(opt =>
 {
@@ -52,6 +52,7 @@ app.UseRouting();
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

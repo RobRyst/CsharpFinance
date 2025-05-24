@@ -20,16 +20,15 @@ const InvoiceForm = () => {
   });
 
   useEffect(() => {
-    axios
-      .get("/api/user")
-      .then((response) => {
-        if (Array.isArray(response.data)) {
-          setUsers(response.data);
-        } else {
-          console.error("Unexpected response:", response.data);
-        }
-      })
-      .catch((error) => console.error("Error fetching users:", error));
+    const printUserData = async () => {
+      try {
+        const response = await axios.get("/api/user");
+        setUsers(response.data);
+      } catch (error) {
+        console.log("Error", error);
+      }
+    };
+    printUserData;
   }, []);
 
   const handleChange = (e) => {
@@ -62,7 +61,6 @@ const InvoiceForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //Fiks senere
       await axios.post("http://localhost:5086/api/invoice", form);
       setSuccess(true);
       setTimeout(() => {

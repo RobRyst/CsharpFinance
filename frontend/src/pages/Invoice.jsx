@@ -19,19 +19,17 @@ const Invoice = () => {
     setFilterTable(value);
   };
 
-  console.log("Invoice component rendering with filterTable:", filterTable); // Debug log
-
   return (
     <>
       <div>
         <h1>Invoice</h1>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between items-center">
           <div className="flex flex-row">
             <input
               name="filterTable"
               type="text"
               placeholder="Filter Table"
-              className="w-64 p-2 mb-4 rounded-l border bg-white"
+              className="w-64 h-12 p-2 rounded-l border bg-white text-l"
               value={filterTable}
               onChange={handleFilterChange}
             />

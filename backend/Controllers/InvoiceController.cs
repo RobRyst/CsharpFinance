@@ -1,7 +1,9 @@
 using backend.Domain.Entities;
 using backend.Domain.Interfaces;
 using backend.Dtos;
+using backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -11,9 +13,12 @@ namespace backend.Controllers
     {
         private readonly IInvoiceService _invoiceService;
 
-        public InvoiceController(IInvoiceService invoiceService)
+        private readonly PdfService _pdfService;
+
+        public InvoiceController(IInvoiceService invoiceService, PdfService pdfService)
         {
             _invoiceService = invoiceService;
+            _pdfService = pdfService;
         }
 
         [HttpGet]
@@ -37,6 +42,14 @@ namespace backend.Controllers
             var invoices = await _invoiceService.GetAllWithUserAsync();
             return Ok(invoices);
         }
+
+        [HttpGet("download-pdf/{id}")]
+        public IActionResult DownloadInvoicePDF(int id)
+        {
+            var pdfBytes = _pdfService.GenerateInvoicePDF();
+            return File(pdfBytes, "application/pdf", "InvoiceList.pdf");
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<Invoice>> Create(Invoice invoice)

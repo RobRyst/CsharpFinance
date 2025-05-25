@@ -15,8 +15,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await userLogin(form);
-      localStorage.setItem("token", res.data.token);
+      const response = await userLogin(form);
+      localStorage.setItem("token", response.data.token);
       setSuccess(true);
       setTimeout(() => {
         navigate("/");

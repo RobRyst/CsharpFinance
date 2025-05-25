@@ -3,6 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using backend.Application.Services;
 using backend.Domain.Interfaces;
 using backend.Services;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +29,22 @@ builder.Services.AddCors(opt =>
     });
 });
 
-builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
-{
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "your-api",
+            ValidAudience = "your-client",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-token-password-key"))
+        };
+    });
 
-});
+builder.Services.AddAuthorization();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

@@ -3,6 +3,12 @@ using backend.Domain.Models;
 using backend.Infrastructure.Data;
 using backend.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+
+
+using System.Text;
 
 namespace backend.Controllers
 {
@@ -23,21 +29,30 @@ namespace backend.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
             var user = _context.Users.FirstOrDefault(user => user.Email == request.Email);
-            if (user == null)
+            if (user == null || _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
             {
                 return Unauthorized("Invalid Email or Password");
             }
 
-            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-
-            if (result == PasswordVerificationResult.Failed)
+            var claims = new[]
             {
-                return Unauthorized("Invalid Email or Password");
-            }
-            Console.WriteLine($"Login attempt: {request.Email} | Hash: {user?.PasswordHash}");
-             return Ok(new { token = "fake-jwt-token",
-                firstname = user.FirstName, 
-                lastname = user.LastName  });
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim("firstname", user.FirstName),
+                new Claim("lastname", user.LastName),
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("powerful-key-used-for-securing-data-in-your-app"));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: "your-api",
+                audience: "your-client",
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: credentials
+            );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            return Ok(new { token = tokenString, firstname = user.FirstName, lastname = user.LastName });
         }
 
         [HttpPost("register")]
@@ -64,9 +79,7 @@ namespace backend.Controllers
 
             _context.Users.Add(user);
             _context.SaveChanges();
-
-            Console.WriteLine($"Login attempt: {request.Email} | Hash: {user?.PasswordHash}");
-            return Ok(new { token = "new-fake-jwt-token" });
+            return Ok(new { token = "powerful-key-used-for-securing-data-in-your-app" });
         }
     }
 }

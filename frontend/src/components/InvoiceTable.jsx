@@ -79,13 +79,11 @@ const InvoiceTable = ({ filterTable }) => {
   const onGridReady = (params) => {
     gridApi.current = params.api;
 
-    // Apply initial filter if one exists
     if (filterTable) {
       params.api.setGridOption("quickFilterText", filterTable);
     }
   };
 
-  // Apply quick filter when filterText changes
   useEffect(() => {
     if (gridApi.current) {
       gridApi.current.setGridOption("quickFilterText", filterTable);

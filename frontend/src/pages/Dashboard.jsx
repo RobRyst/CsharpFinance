@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import BudgetDiagram from "../components/BudgetDiagram";
 
 const DashboardPage = () => {
   return (
@@ -15,7 +16,7 @@ const DashboardPage = () => {
         </div>
         <div className="flex flex-col border rounded-xl p-6 basis-1/3">
           <span>Income</span>
-          <span class="text-4xl font-bold">$ 3836</span>
+          <span className="text-4xl font-bold">$ 3836</span>
         </div>
         <div className="flex flex-col border rounded-xl p-6 basis-1/3">
           <span>Expenses</span>
@@ -25,7 +26,7 @@ const DashboardPage = () => {
       <div className="grid grid-cols-2 gap-5">
         <div className="bg-white my-6 rounded-xl">
           <div className="flex flex-row justify-between p-4 ml-4 items-center">
-            <span class="text-2xl font-bold">Pots</span>
+            <span className="text-2xl font-bold">Pots</span>
             <NavLink to="/pot">See Details &gt;</NavLink>
           </div>
           <div>
@@ -41,21 +42,21 @@ const DashboardPage = () => {
                 <div className="flex flex-col gap-3 basis-1/2">
                   <div className="flex flex-col border-l-4 border-emerald-700 px-2">
                     <span>Savings</span>
-                    <span class="text-base font-bold">$ 159</span>
+                    <span className="text-base font-bold">$ 159</span>
                   </div>
-                  <div class="flex flex-col border-l-4 border-gray-500 px-2">
+                  <div className="flex flex-col border-l-4 border-gray-500 px-2">
                     <span>Concert Ticket</span>
-                    <span class="text-base font-bold">$ 110</span>
+                    <span className="text-base font-bold">$ 110</span>
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 basis-1/2">
-                  <div class="flex flex-col border-l-4 border-sky-500 px-2">
+                  <div className="flex flex-col border-l-4 border-sky-500 px-2">
                     <span>Gift</span>
-                    <span class="text-base font-bold">$ 40</span>
+                    <span className="text-base font-bold">$ 40</span>
                   </div>
-                  <div class="flex flex-col border-l-4 border-rose-400 px-2">
+                  <div className="flex flex-col border-l-4 border-rose-400 px-2">
                     <span>New Laptop</span>
-                    <span class="text-base font-bold">$10</span>
+                    <span className="text-base font-bold">$ 10</span>
                   </div>
                 </div>
               </div>
@@ -67,8 +68,28 @@ const DashboardPage = () => {
             <span className="text-2xl font-bold">Budget</span>
             <NavLink to="/budget">See Details &gt;</NavLink>
           </div>
-          <div>
-            <p>Temp text</p>
+          <div className="flex flex-row justify-center gap-20 items-center">
+            <div>
+              <BudgetDiagram />
+            </div>
+            <div className="flex flex-col it gap-5">
+              <div className="flex flex-col border-l-4 border-blue-500 px-2">
+                <span>Dining Out</span>
+                <span className="text-base font-bold">$ 75</span>
+              </div>
+              <div className="flex flex-col border-l-4 border-orange-400 px-2">
+                <span>Personal Care</span>
+                <span className="text-base font-bold">$ 100</span>
+              </div>
+              <div className="flex flex-col border-l-4 border-emerald-500 px-2">
+                <span>Bills</span>
+                <span className="text-base font-bold">$ 750</span>
+              </div>
+              <div className="flex flex-col border-l-4 border-sky-300 px-2">
+                <span>Entertainment</span>
+                <span className="text-base font-bold">$ 50</span>
+              </div>
+            </div>
           </div>
         </div>
         <div>

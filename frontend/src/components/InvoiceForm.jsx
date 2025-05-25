@@ -23,15 +23,6 @@ const InvoiceForm = () => {
     const printUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        /*
-        console.log("JWT token:", token);
-        if (!token) {
-          console.log(
-            "No token found, redirect to login or handle accordingly"
-          );
-          return;
-        }
-        */
         const response = await axios.get("http://localhost:5086/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         });

@@ -22,13 +22,25 @@ const InvoiceForm = () => {
   useEffect(() => {
     const printUserData = async () => {
       try {
-        const response = await axios.get("/api/user");
+        const token = localStorage.getItem("token");
+        /*
+        console.log("JWT token:", token);
+        if (!token) {
+          console.log(
+            "No token found, redirect to login or handle accordingly"
+          );
+          return;
+        }
+        */
+        const response = await axios.get("http://localhost:5086/api/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUsers(response.data);
       } catch (error) {
         console.log("Error", error);
       }
     };
-    printUserData;
+    printUserData();
   }, []);
 
   const handleChange = (e) => {

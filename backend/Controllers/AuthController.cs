@@ -41,7 +41,7 @@ namespace backend.Controllers
                 new Claim("lastname", user.LastName),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("powerful-key-used-for-securing-data-in-your-app"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-token-password-key"));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
                 issuer: "your-api",
@@ -79,7 +79,9 @@ namespace backend.Controllers
 
             _context.Users.Add(user);
             _context.SaveChanges();
-            return Ok(new { token = "powerful-key-used-for-securing-data-in-your-app" });
+
+            Console.WriteLine($"Login attempt: {request.Email} | Hash: {user?.PasswordHash}");
+            return Ok(new { token = "new-fake-jwt-token" });
         }
     }
 }

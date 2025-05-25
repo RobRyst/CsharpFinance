@@ -5,6 +5,7 @@ using backend.Domain.Interfaces;
 using backend.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 
@@ -25,24 +26,33 @@ builder.Services.AddCors(opt =>
     {
         policyBuilder.AllowAnyHeader()
                      .AllowAnyMethod()
-                     .WithOrigins("http://localhost:5173");
+                     .WithOrigins("http://localhost:5173")
+                     .AllowCredentials();
     });
 });
 
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+var jwtKey = "powerful-key-used-for-securing-data-in-your-app";
+var key = Encoding.UTF8.GetBytes(jwtKey);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "your-api",
-            ValidAudience = "your-client",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-token-password-key"))
-        };
-    });
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "your-api",
+        ValidAudience = "your-client",
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ClockSkew = TimeSpan.Zero
+    };
+});
 
 builder.Services.AddAuthorization();
 
@@ -54,7 +64,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     //app.MapOpenApi();

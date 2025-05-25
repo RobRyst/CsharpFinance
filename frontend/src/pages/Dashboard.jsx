@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import BudgetDiagram from "../components/BudgetDiagram";
+import LatestInvoices from "../components/LatestInvoices";
 
 const DashboardPage = () => {
   return (
@@ -12,7 +13,7 @@ const DashboardPage = () => {
       <div className="flex flex-row justify-between gap-10 mx-6 my-6">
         <div className=" flex flex-col border rounded-xl p-6 basis-1/3">
           <span>Current Balance</span>
-          <span class="text-4xl font-bold">$ 4836</span>
+          <span className="text-4xl font-bold">$ 4836</span>
         </div>
         <div className="flex flex-col border rounded-xl p-6 basis-1/3">
           <span>Income</span>
@@ -20,7 +21,7 @@ const DashboardPage = () => {
         </div>
         <div className="flex flex-col border rounded-xl p-6 basis-1/3">
           <span>Expenses</span>
-          <span class="text-4xl font-bold">$ 1700</span>
+          <span className="text-4xl font-bold">$ 1700</span>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-5">
@@ -96,6 +97,9 @@ const DashboardPage = () => {
           <div className="flex flex-row justify-between items-center">
             <span className="text-2xl font-bold">Invoices</span>
             <NavLink to="/invoice">See Details &gt;</NavLink>
+          </div>
+          <div>
+            <LatestInvoices />
           </div>
         </div>
         <div>

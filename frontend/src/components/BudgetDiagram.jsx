@@ -11,6 +11,7 @@ const getChartData = () => {
 };
 
 const BudgetDiagram = () => {
+  // eslint-disable-next-line no-unused-vars
   const [options, setOptions] = useState({
     data: getChartData(),
     title: {

@@ -12,7 +12,6 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly PasswordHasher<User> _passwordHasher;
-        private readonly ILogger<AuthController> _logger;
 
         public AuthController(ApplicationDbContext context)
         {
@@ -51,7 +50,7 @@ namespace backend.Controllers
     }
             var existingUser = _context.Users.FirstOrDefault(u => u.Email == request.Email);
             if (existingUser != null)
-                return BadRequest("User already exists with this email.");
+                return BadRequest("User with this email already exists. ");
 
             var user = new User
             {

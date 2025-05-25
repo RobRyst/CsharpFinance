@@ -50,6 +50,14 @@ namespace backend.Controllers
             return File(pdfBytes, "application/pdf", "InvoiceList.pdf");
         }
 
+        [HttpGet("download-summary-pdf")]
+        public async Task<IActionResult> DownloadInvoiceSummaryPDF()
+        {
+            var invoices = await _invoiceService.GetAllWithUserAsync();
+            var pdfBytes = _pdfService.GenerateInvoiceSummaryPDF(invoices.ToList());
+            return File(pdfBytes, "application/pdf", "InvoiceSummary.pdf");
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<Invoice>> Create(Invoice invoice)

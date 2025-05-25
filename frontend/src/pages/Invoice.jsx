@@ -2,6 +2,7 @@
 import { useState } from "react";
 import InvoiceTable from "../components/InvoiceTable";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Invoice = () => {
   const [filterTable, setFilterTable] = useState("");
@@ -11,7 +12,29 @@ const Invoice = () => {
     navigate("/invoice/createInvoice");
   };
 
-  const handleDownloadAllInvoices = () => {};
+  const handleDownloadAllInvoices = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5086/api/invoice/download-summary-pdf",
+        {
+          responseType: "blob",
+        }
+      );
+
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "InvoiceSummary.pdf");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Failed to download all invoices", error);
+    }
+  };
 
   const handleFilterChange = (e) => {
     const value = e.target.value;

@@ -2,28 +2,51 @@ import { useState } from "react";
 import { userLogin } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await userLogin(form);
       localStorage.setItem("token", response.data.token);
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          firstName: response.data.firstname,
+          lastName: response.data.lastname,
+          email: form.email,
+        })
+      );
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "You successfully logged in",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setSuccess(true);
       setTimeout(() => {
         navigate("/");
       }, 1000);
       // eslint-disable-next-line no-unused-vars
     } catch (err) {
-      setError("Login Failed");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Incorrect Email or Password",
+      });
     }
   };
 
@@ -34,11 +57,6 @@ const Login = () => {
           <h1 className="text-4xl text-zinc-600 font-bold pb-6 text-center">
             Sign in
           </h1>
-          {error && (
-            <div className="text-red-500 text-center mb-4">{error}</div>
-          )}
-
-          {success && <div className="text-green-600 text-center mb-4"></div>}
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <input
               className="border rounded px-3 py-2 mb-2 w-full"

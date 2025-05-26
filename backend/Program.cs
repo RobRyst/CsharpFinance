@@ -31,7 +31,7 @@ builder.Services.AddCors(opt =>
     });
 });
 
-var jwtKey = "powerful-key-used-for-securing-data-in-your-app";
+var jwtKey = "your-password-jwt-key-is-safe-with-me-value";
 var key = Encoding.UTF8.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(options =>

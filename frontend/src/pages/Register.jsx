@@ -2,6 +2,7 @@ import { useState } from "react";
 import { userRegister } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -32,13 +33,24 @@ const Register = () => {
     try {
       const res = await userRegister(form);
       localStorage.setItem("token", res.data.token);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "You successfully registered your account",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setSuccess(true);
       setTimeout(() => {
         navigate("/login");
       }, 1000);
       // eslint-disable-next-line no-unused-vars
     } catch (err) {
-      setError("Registration Failed");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Incorrect Email or Password",
+      });
     }
   };
 

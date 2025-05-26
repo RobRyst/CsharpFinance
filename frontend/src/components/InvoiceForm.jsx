@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import Swel from "sweetalert2";
 
-const InvoiceForm = () => {
+const InvoiceForm = ({ onInvoiceCreated }) => {
   const [users, setUsers] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
   const [form, setForm] = useState({
     userId: "",
     status: "draft",
@@ -65,13 +64,13 @@ const InvoiceForm = () => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5086/api/invoice", form);
+      if (onInvoiceCreated) {
+        onInvoiceCreated();
+      }
       setSuccess(true);
-      setTimeout(() => {
-        navigate("/invoice");
-      }, 1000);
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      setError("FAILED");
+      setError("");
     }
   };
 
@@ -94,7 +93,7 @@ const InvoiceForm = () => {
           </option>
           {users.map((user) => (
             <option key={user.id} value={user.id}>
-              {user.firstName} {user.lastName}
+              {user.id}. {user.firstName} {user.lastName}
             </option>
           ))}
         </select>

@@ -6,7 +6,7 @@ import axios from "axios";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const InvoiceTable = ({ filterTable }) => {
+const InvoiceTable = ({ filterTable, refreshInvoiceTable }) => {
   const [rowData, setRowData] = useState([]);
   const gridApi = useRef(null);
 
@@ -17,7 +17,7 @@ const InvoiceTable = ({ filterTable }) => {
         setRowData(response.data);
       })
       .catch((error) => console.error("Failed to fetch", error));
-  }, []);
+  }, [refreshInvoiceTable]);
 
   const columnDefs = useMemo(() => {
     const onDeleteSuccess = (deletedId) => {
@@ -88,7 +88,7 @@ const InvoiceTable = ({ filterTable }) => {
     if (gridApi.current) {
       gridApi.current.setGridOption("quickFilterText", filterTable);
     }
-  }, [filterTable]);
+  }, [filterTable, refreshInvoiceTable]);
 
   return (
     <div className="ag-theme-alpine" style={{ height: 600, width: "100%" }}>

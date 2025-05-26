@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Invoice from "./pages/Invoice";
 import Login from "./pages/Login";
 import Pot from "./pages/Pot";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import { Routes, Route } from "react-router-dom";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="pot" element={<Pot />} />
           <Route path="bill" element={<Bill />} />
           <Route path="invoice/createInvoice" element={<CreateInvoice />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </>

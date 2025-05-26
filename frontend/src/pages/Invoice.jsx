@@ -38,45 +38,47 @@ const Invoice = () => {
 
   const handleFilterChange = (e) => {
     const value = e.target.value;
-    console.log("Filter input changed to:", value); // Debug log
+    console.log("Filter input changed to:", value);
     setFilterTable(value);
   };
 
   return (
     <>
-      <div>
-        <h1>Invoice</h1>
-        <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-row">
-            <input
-              name="filterTable"
-              type="text"
-              placeholder="Filter Table"
-              className="w-64 h-12 p-2 rounded-l border bg-white text-l"
-              value={filterTable}
-              onChange={handleFilterChange}
-            />
+      <div className="bg-gray-300 w-full min-h-screen px-4 py-6">
+        <div className="max-w-10xl mx-auto">
+          <h1>Invoice</h1>
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row">
+              <input
+                name="filterTable"
+                type="text"
+                placeholder="Filter Table"
+                className="w-64 h-12 p-2 rounded-l border bg-white text-l"
+                value={filterTable}
+                onChange={handleFilterChange}
+              />
+            </div>
+            <div className="flex flex-row gap-5">
+              <button
+                type="button"
+                onClick={handleCreateInvoice}
+                className="bg-zinc-600 hover:bg-blue-700 text-white p-2 mb-4 rounded-xl w-40"
+              >
+                Create Invoice
+              </button>
+              <button
+                type="button"
+                onClick={handleDownloadAllInvoices}
+                className="bg-zinc-600 hover:bg-blue-700 text-white p-2 mb-4 rounded-xl w-40"
+              >
+                Download All Invoices
+              </button>
+            </div>
           </div>
-          <div className="flex flex-row gap-5">
-            <button
-              type="button"
-              onClick={handleCreateInvoice}
-              className="mt-4 bg-zinc-600 hover:bg-blue-700 text-white p-2 mb-4 rounded-xl"
-            >
-              + Create Invoice
-            </button>
-            <button
-              type="button"
-              onClick={handleDownloadAllInvoices}
-              className="mt-4 bg-zinc-600 hover:bg-blue-700 text-white p-2 mb-4 rounded-xl"
-            >
-              + Download All Invoices
-            </button>
-          </div>
+
+          <InvoiceTable filterTable={filterTable} />
         </div>
       </div>
-
-      <InvoiceTable filterTable={filterTable} />
     </>
   );
 };

@@ -62,27 +62,27 @@ This project is a practical implementation of an invoice management platform fea
   - Enhanced tables for invoices with real-time search/filter/sort
 
 ---
-###🧠 What I Learned
+## 🧠 What I Learned
 Working on the Invoice Management System has significantly deepened my understanding of full-stack web development, especially within the ASP.NET Core ecosystem. Here are some key takeaways from the project:
 
-#ASP.NET Core MVC Architecture
+### ASP.NET Core MVC Architecture
 - I gained hands-on experience structuring a scalable web application using the Model-View-Controller (MVC) pattern. I now better understand the separation of concerns and how to manage routing, controllers, views, and services cleanly.
 
-#Entity Framework Core & Database Integration
+### Entity Framework Core & Database Integration
 Building and managing the database layer using EF Core helped me learn about data modeling, migrations, and LINQ queries. I also became more confident with relational database design and interaction.
 
-#Authentication & Authorization
+### Authentication & Authorization
 Implementing user login and registration with ASP.NET Core Identity gave me practical knowledge of securing applications, managing roles, and protecting routes with authorization policies.
 
-#Frontend Development with TailwindCSS
+### Frontend Development with TailwindCSS
 I improved my UI/UX skills by using TailwindCSS to build responsive and consistent interfaces without relying on heavy UI libraries.
 
-#PDF Generation in .NET
+### PDF Generation in .NET
 Integrating PDF generation tools (e.g., DinkToPdf, QuestPDF) taught me how to dynamically create exportable documents — a skill often needed in enterprise software.
 
-#Docker & DevOps Practices
+### Docker & DevOps Practices
 Containerizing the application using Docker and managing services with docker-compose introduced me to real-world DevOps workflows, including environment configuration and portable deployments.
 
-#Clean Code and Architecture Principles
+### Clean Code and Architecture Principles
 Applying interfaces, dependency injection, and service/repository patterns helped me write more maintainable and testable code.
 

@@ -63,26 +63,26 @@ This project is a practical implementation of an invoice management platform fea
 
 ---
 ## 🧠 What I Learned
-Working on the Invoice Management System has significantly deepened my understanding of full-stack web development, especially within the ASP.NET Core ecosystem. Here are some key takeaways from the project:
+- Working on the Invoice Management System has significantly deepened my understanding of full-stack web development, especially within the ASP.NET Core ecosystem. Here are some key takeaways from the project:
 
 ### ASP.NET Core MVC Architecture
-I gained experience structuring a scalable web application using the Model-View-Controller (MVC) pattern. I now better understand how to manage routing, controllers, views, and services cleanly.
+- I gained experience structuring a scalable web application using the Model-View-Controller (MVC) pattern. I now better understand how to manage routing, controllers, views, and services cleanly.
 
 ### Entity Framework Core & Database Integration
-Building and managing the database using EF Core helped me learn about data modeling, migrations, and queries.
+- Building and managing the database using EF Core helped me learn about data modeling, migrations, and queries.
 
 ### Authentication & Authorization
-Implementing user login and registration with ASP.NET Core Identity gave me practical knowledge of securing applications, managing roles, and protecting routes with authorization policies.
+- Implementing user login and registration with ASP.NET Core Identity gave me practical knowledge of securing applications, managing roles, and protecting routes with authorization policies.
 
 ### Frontend Development with TailwindCSS
-I improved my UI/UX skills by using TailwindCSS to build responsive and consistent interfaces without relying on heavy UI libraries.
+- I improved my UI/UX skills by using TailwindCSS to build responsive and consistent interfaces without relying on heavy UI libraries.
 
 ### PDF Generation in .NET
-Integrating PDF generation tools like QuestPDF taught me how to dynamically create exportable documents, a skill often needed in enterprise software.
+- Integrating PDF generation tools like QuestPDF taught me how to dynamically create exportable documents, a skill often needed in enterprise software.
 
 ### Docker & DevOps Practices
-Learning about using Docker and managing services with docker-compose introduced me to real-world DevOps workflows, including environment configuration and portable deployments.
+- Learning about using Docker and managing services with docker-compose introduced me to real-world DevOps workflows, including environment configuration and portable deployments.
 
 ### Clean Code and Architecture Principles
-Applying interfaces, dependency injection (DI), and service patterns helped me write more maintainable and testable code.
+- Applying interfaces, dependency injection (DI), and service patterns helped me write more maintainable and testable code.
 
